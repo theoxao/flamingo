@@ -38,6 +38,8 @@ dependencies {
     compile 'com.aliyun.openservices:aliyun-openservices:OTS-2.0.4'
     compile 'org.koin:koin-ktor:2.0.1'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.11.1'
     compile group: 'com.google.guava', name: 'guava', version: '28.1-jre'
     compile 'org.litote.kmongo:kmongo:3.11.1'
