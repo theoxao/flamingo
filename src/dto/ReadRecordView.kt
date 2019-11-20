@@ -4,7 +4,7 @@ import com.theoxao.model.ReadRecord
 import org.apache.commons.beanutils.BeanUtils
 import java.util.*
 
-class ReadRecordDTO {
+class ReadRecordView {
     var id: String? = null
     var refBook: String? = null
     var startAt: Date? = null
@@ -14,8 +14,8 @@ class ReadRecordDTO {
     var currentPage: Int = 0
 
     companion object {
-        fun fromEntity(entity: ReadRecord): ReadRecordDTO {
-            val record = ReadRecordDTO()
+        fun fromEntity(entity: ReadRecord): ReadRecordView {
+            val record = ReadRecordView()
             BeanUtils.copyProperties(entity, record)
             record.id = entity.id?.toHexString()
             return record

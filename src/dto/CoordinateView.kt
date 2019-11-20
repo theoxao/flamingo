@@ -1,6 +1,6 @@
 package com.theoxao.dto
 
-class Coordinate {
+class CoordinateView {
     var x: String? = null
     var y: Int = 0
 

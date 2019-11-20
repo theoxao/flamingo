@@ -8,9 +8,6 @@ import io.ktor.request.ApplicationRequest
  */
 
 class MessageService(ph:String) {
-    fun listMessage(request: ApplicationRequest): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+    fun listMessage(request: ApplicationRequest): Any =TODO()
 
 }

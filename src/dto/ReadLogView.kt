@@ -9,7 +9,7 @@ import java.util.Date
 /**
  * Created by theo on 2018/12/3
  */
-class ReadLogDTO {
+class ReadLogView {
     var id: String? = null
     var userId: String? = null
     var refBook: String? = null
@@ -25,16 +25,16 @@ class ReadLogDTO {
 
     companion object {
 
-        fun fromEntity(entity: ReadLog, currentStatus: Int = 0): ReadLogDTO {
-            val record = ReadLogDTO()
+        fun fromEntity(entity: ReadLog, currentStatus: Int = 0): ReadLogView {
+            val record = ReadLogView()
             BeanUtils.copyProperties(entity, record)
             record.id = entity.id.toHexString()
             record.currentStatus = currentStatus
             return record
         }
 
-        fun fromRecord(entity: ReadRecord, currentStatus: Int = 0): ReadLogDTO {
-            val record = ReadLogDTO()
+        fun fromRecord(entity: ReadRecord, currentStatus: Int = 0): ReadLogView {
+            val record = ReadLogView()
             BeanUtils.copyProperties(entity, record)
             record.currentStatus = currentStatus
             return record

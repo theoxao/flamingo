@@ -2,7 +2,7 @@ package com.theoxao.dto
 
 import com.theoxao.model.Message
 
-class MessageDTO {
+class MessageView {
 
     var id: String? = null
     var sender: String? = null
@@ -14,8 +14,8 @@ class MessageDTO {
 
     companion object {
 
-        fun fromEntity(entity: Message): MessageDTO {
-            val record = MessageDTO()
+        fun fromEntity(entity: Message): MessageView {
+            val record = MessageView()
 //            BeanUtils.copyProperties(entity, record)
             record.id = entity.id?.toHexString()
             TODO()

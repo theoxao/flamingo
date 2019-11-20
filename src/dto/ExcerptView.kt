@@ -9,7 +9,7 @@ import java.util.Date
 /**
  * Created by theo on 2018/11/13
  */
-class ExcerptDTO {
+class ExcerptView {
     var id: String? = null
     var userId: String? = null
     var refBook: String? = null
@@ -19,8 +19,8 @@ class ExcerptDTO {
     var createAt: Date? = null
 
     companion object {
-        fun fromEntity(entity: Excerpt): ExcerptDTO {
-            val record = ExcerptDTO()
+        fun fromEntity(entity: Excerpt): ExcerptView {
+            val record = ExcerptView()
             BeanUtils.copyProperties(entity, record)
             record.id = entity.id?.toHexString()
             return record

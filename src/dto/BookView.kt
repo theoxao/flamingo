@@ -7,7 +7,7 @@ import org.bson.types.ObjectId
  * Created by theo on 2018/11/7
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-open class BookDTO {
+open class BookView {
     var id: String? = null
     var name: String? = null
     var author: String? = null

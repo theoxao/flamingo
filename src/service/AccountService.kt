@@ -1,6 +1,6 @@
 package com.theoxao.service
 
-import com.theoxao.dto.ProfileDTO
+import com.theoxao.dto.ProfileView
 import io.ktor.request.ApplicationRequest
 
 /**
@@ -8,5 +8,5 @@ import io.ktor.request.ApplicationRequest
  * @date 19-10-31
  */
 class AccountService(name:String) {
-    fun getProfile(request: ApplicationRequest): ProfileDTO  = TODO()
+    fun getProfile(request: ApplicationRequest): ProfileView  = TODO()
 }

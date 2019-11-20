@@ -39,6 +39,7 @@ fun Application.base() = with(this) {
         }
     }
 
+
     install(Koin) {
         modules(module {
 
@@ -55,9 +56,8 @@ fun Application.base() = with(this) {
             single { ShelfService(get()) }
             single { StatService(get()) }
             single { TagService(get()) }
-
-
         })
+
     }
 }
 

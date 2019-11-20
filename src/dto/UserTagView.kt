@@ -10,7 +10,7 @@ import java.util.*
  * Created by theo on 2018/12/3
  */
 @JsonIgnoreProperties("userId")
-class UserTagDTO {
+class UserTagView {
     var id: String? = null
     var userId: String? = null
     var tag: String? = null
@@ -25,8 +25,8 @@ class UserTagDTO {
 
 
     companion object {
-        fun fromEntity(entity: UserTag): UserTagDTO {
-            val record = UserTagDTO()
+        fun fromEntity(entity: UserTag): UserTagView {
+            val record = UserTagView()
             BeanUtils.copyProperties(entity, record)
             record.id = entity.id?.toHexString()
             return record

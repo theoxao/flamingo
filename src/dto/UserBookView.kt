@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Created by theo on 2018/12/3
  */
-open class UserBookDTO {
+open class UserBookView {
 
     var id: String? = null
     var refBookId: String? = null
@@ -38,8 +38,8 @@ open class UserBookDTO {
     var updateAt: Date? = null
 
     companion object {
-        fun fromEntity(entity: UserBook): UserBookDTO {
-            val record = UserBookDTO()
+        fun fromEntity(entity: UserBook): UserBookView {
+            val record = UserBookView()
             BeanUtils.copyProperties(entity, record)
             record.id = entity.id?.toHexString()
             return record

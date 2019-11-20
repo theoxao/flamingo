@@ -1,7 +1,7 @@
 package com.theoxao.dto
 
 
-class ProfileDTO {
+class ProfileView {
     var userId: String? = null
     var nickName: String? = null
     var avatarUrl: String? = null

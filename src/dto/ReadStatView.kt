@@ -4,7 +4,7 @@ package com.theoxao.dto
 /**
  * Created by theo on 2018/11/15
  */
-class ReadStatDTO {
+class ReadStatView {
 
     var pages: String? = null
     var totalTime: String? = null

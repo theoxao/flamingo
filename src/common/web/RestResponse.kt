@@ -3,7 +3,6 @@ package common.web
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.theoxao.common.dto.Err
-import com.theoxao.dto.MedalRecordDTO
 import java.util.*
 
 
