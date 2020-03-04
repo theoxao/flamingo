@@ -42,7 +42,6 @@ fun Application.base() = with(this) {
 
     install(Koin) {
         modules(module {
-
             single { AccountService(get()) }
             single { MessageService(get()) }
             single { AuthService(get()) }
