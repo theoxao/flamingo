@@ -1,7 +1,10 @@
 package com.theoxao.ktor
 
 import com.theoxao.handleRequest
-import com.theoxao.service.read.*
+import com.theoxao.service.read.BookService
+import com.theoxao.service.read.ExcerptService
+import com.theoxao.service.read.ReadService
+import com.theoxao.service.read.ShelfService
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.response.respond
@@ -16,12 +19,10 @@ import org.koin.ktor.ext.inject
  * @date 19-11-1
  */
 fun Application.read() = with(this) {
-    val readService: ReadService by inject()
-    val bookService: BookService by inject()
-    val excerptService: ExcerptService by inject()
-    val musicService: MusicService by inject()
-    val shelfService: ShelfService by inject()
-    val tagService: TagService by inject()
+    val readService by inject<ReadService>()
+    val bookService by inject<BookService>()
+    val excerptService by inject<ExcerptService>()
+    val shelfService by inject<ShelfService>()
 
     routing {
 
@@ -65,13 +66,11 @@ fun Application.read() = with(this) {
 
         }
 
-        route("/music") {
-            get("/list") {
-                handleRequest(musicService::list)
-            }
-        }
-
         route("/read") {
+            get("/user_book"){
+                handleRequest (readService::getUserBook)
+            }
+
             post("/add_book") {
                 handleRequest(readService::addBook)
             }
@@ -88,24 +87,10 @@ fun Application.read() = with(this) {
                 handleRequest(readService::readOperation)
             }
         }
+
         route("/shelf") {
             get("/list") {
                 handleRequest(shelfService::list)
-            }
-        }
-
-        route("/tag") {
-            get("list") {
-                handleRequest(tagService::list)
-            }
-            post("/add") {
-                handleRequest(tagService::add)
-            }
-            post("/remove") {
-                handleRequest(tagService::remove)
-            }
-            get("/recommend") {
-                handleRequest(tagService::recommend)
             }
         }
 

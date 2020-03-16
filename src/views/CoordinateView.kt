@@ -1,4 +1,4 @@
-package com.theoxao.dto
+package com.theoxao.views
 
 class CoordinateView {
     var x: String? = null

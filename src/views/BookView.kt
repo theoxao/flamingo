@@ -1,4 +1,4 @@
-package com.theoxao.dto
+package com.theoxao.views
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.bson.types.ObjectId

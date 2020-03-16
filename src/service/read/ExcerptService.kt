@@ -1,5 +1,6 @@
 package com.theoxao.service.read
 
+import com.theoxao.common.web.BaseResponse
 import common.web.RestResponse
 import io.ktor.request.ApplicationRequest
 
@@ -8,11 +9,11 @@ import io.ktor.request.ApplicationRequest
  * @date 19-11-1
  */
 class ExcerptService(ph: Any) {
-    fun selectByPage(request: ApplicationRequest): RestResponse<Any> = TODO()
-    fun findById(request: ApplicationRequest): RestResponse<Any> = TODO()
-    fun add(request: ApplicationRequest): RestResponse<Any> = TODO()
-    fun edit(request: ApplicationRequest): RestResponse<Any> = TODO()
-    fun getEdit(request: ApplicationRequest): RestResponse<Any> = TODO()
-    fun remove(request: ApplicationRequest): RestResponse<Any> = TODO()
+    fun selectByPage(request: ApplicationRequest): BaseResponse = TODO()
+    fun findById(request: ApplicationRequest): BaseResponse = TODO()
+    fun add(request: ApplicationRequest): BaseResponse = TODO()
+    fun edit(request: ApplicationRequest): BaseResponse = TODO()
+    fun getEdit(request: ApplicationRequest): BaseResponse = TODO()
+    fun remove(request: ApplicationRequest): BaseResponse = TODO()
 
 }

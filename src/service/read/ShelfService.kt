@@ -1,5 +1,6 @@
 package com.theoxao.service.read
 
+import com.theoxao.common.web.BaseResponse
 import common.web.RestResponse
 import io.ktor.request.ApplicationRequest
 
@@ -8,5 +9,5 @@ import io.ktor.request.ApplicationRequest
  * @date 19-11-1
  */
 class ShelfService(ph: String) {
-    fun list(request: ApplicationRequest): RestResponse<Any> = TODO()
+    fun list(request: ApplicationRequest): BaseResponse = TODO()
 }

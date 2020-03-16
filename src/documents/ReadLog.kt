@@ -12,10 +12,6 @@ class ReadLog {
     var endAt: Date? = null
     var duration: Long = 0
     var currentPage: Int? = null
-    /**
-     * 阅读类型 0 普通阅读 1 倒计时阅读
-     */
-    var type: Int? = null
     var createAt: Date = Date()
     var updateAt: Date = Date()
     var finished: Boolean = false

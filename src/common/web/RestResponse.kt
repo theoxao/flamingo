@@ -3,21 +3,19 @@ package common.web
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.theoxao.common.dto.Err
-import java.util.*
+import kotlinx.serialization.Serializable
 
-
-class RestResponse<T>() {
-    private var status = SC_INTERNAL_SERVER_ERROR
-    private var error: String? = null
-    var timestamp: Long? = Date().time
-        set(timestamp) {
-            field = this.timestamp
-        }
-    private var data: T? = null
+@Serializable
+data class RestResponse<T>(
+    var status: Int = SC_INTERNAL_SERVER_ERROR,
+    var error: String? = null,
+    var data: T? = null
+) {
 
     val isSuccess: Boolean
         @JsonIgnore
         get() = status == SC_OK
+
 
     constructor(data: T) : this() {
         this.status = SC_OK
@@ -59,26 +57,32 @@ class RestResponse<T>() {
         }
 
         val STATIC_ERROR_RESPONSE = "{\"status\": 500, \"error\": \"服务器内部错误!\", \"data\": null}"
+
         /**
          * 请求成功
          */
         val SC_OK = 200
+
         /**
          * 重定向
          */
         val SC_MOVED_TEMPORARILY = 302
+
         /**
          * 服务器异常
          */
         val SC_INTERNAL_SERVER_ERROR = 500
+
         /**
          * 资源不存在
          */
         val SC_NOT_FOUND = 404
+
         /**
          * 没有权限
          */
         val SC_UNAUTHORIZED = 401
+
         /**
          * 需要付费
          */

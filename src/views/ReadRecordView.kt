@@ -1,4 +1,4 @@
-package com.theoxao.dto
+package com.theoxao.views
 
 import com.theoxao.model.ReadRecord
 import org.apache.commons.beanutils.BeanUtils
