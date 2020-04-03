@@ -17,10 +17,7 @@ import org.litote.kmongo.reactivestreams.KMongo
 
 class Mongo(val mongoApplication: MongoApplication) {
 
-
-
     companion object Feature : ApplicationFeature<Application, MongoApplication, Mongo> {
-
         override fun install(
             pipeline: Application,
             configure: MongoApplication.() -> Unit
@@ -28,11 +25,8 @@ class Mongo(val mongoApplication: MongoApplication) {
             val application = MongoApplication().apply(configure)
             return Mongo(application)
         }
-
         override val key: AttributeKey<Mongo> = AttributeKey("Kmongo")
-
     }
-
 }
 
 class MongoApplication {

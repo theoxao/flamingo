@@ -1,8 +1,9 @@
 package com.theoxao.service.read
 
-import com.theoxao.common.web.BaseResponse
+import com.theoxao.common.web.BaseView
 import com.theoxao.repository.UserBookRepository
 import com.theoxao.views.UserBookView
+import common.web.RestResponse
 import io.ktor.request.ApplicationRequest
 
 /**
@@ -11,16 +12,16 @@ import io.ktor.request.ApplicationRequest
  */
 class ReadService(private val userBookRepository: UserBookRepository) {
 
-    suspend fun getUserBook(request: ApplicationRequest): BaseResponse {
-        val id = request.call.parameters["id"] ?: throw RuntimeException(" parameter missing")
+    suspend fun getUserBook(request: ApplicationRequest): RestResponse<*> {
+        val id = request.call.parameters["id"]!!
         val book = userBookRepository.getUserBookById(id)
-        return book?.let { UserBookView.fromEntity(it) } ?: BaseResponse.notFount()
+        return book?.let { RestResponse(UserBookView.fromEntity(it)) }?:RestResponse(BaseView())
     }
 
-    fun addBook(request: ApplicationRequest): BaseResponse = TODO()
-    fun detail(request: ApplicationRequest): BaseResponse = TODO()
-    fun readLog(request: ApplicationRequest): BaseResponse = TODO()
-    fun readStat(request: ApplicationRequest): BaseResponse = TODO()
-    fun readOperation(request: ApplicationRequest): BaseResponse = TODO()
+    fun addBook(request: ApplicationRequest): RestResponse<*> = TODO()
+    fun detail(request: ApplicationRequest): RestResponse<*> = TODO()
+    fun readLog(request: ApplicationRequest): RestResponse<*> = TODO()
+    fun readStat(request: ApplicationRequest): RestResponse<*> = TODO()
+    fun readOperation(request: ApplicationRequest): RestResponse<*> = TODO()
 
 }

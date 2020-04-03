@@ -1,6 +1,7 @@
 package com.theoxao.views
 
 import com.theoxao.common.web.BaseResponse
+import com.theoxao.common.web.BaseView
 import com.theoxao.documents.UserBook
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -38,7 +39,7 @@ data class UserBookView (
      */
     var createAt: Long?,
     var updateAt: Long?
-): BaseResponse() {
+): BaseView() {
     companion object {
         fun fromEntity(entity: UserBook) = UserBookView(
             id = entity._id.toHexString(),

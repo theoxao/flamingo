@@ -1,8 +1,6 @@
 package com.theoxao
 
-import com.theoxao.common.web.BaseResponse
 import com.theoxao.config.Mongo
-import com.theoxao.repository.BaseRepository
 import com.theoxao.repository.UserBookRepository
 import com.theoxao.service.AuthService
 import com.theoxao.service.OCRService
@@ -14,16 +12,13 @@ import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
-import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.request.ApplicationRequest
 import io.ktor.response.respond
-import io.ktor.serialization.DefaultJsonConfiguration
-import io.ktor.serialization.serialization
+import io.ktor.serialization.json
 import io.ktor.util.KtorExperimentalAPI
 import io.ktor.util.pipeline.PipelineContext
-import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 import org.koin.ktor.ext.Koin
 
@@ -48,13 +43,14 @@ fun Application.base() = with(this) {
     }
 
     install(ContentNegotiation) {
-        serialization()
+        json()
     }
 
     install(Koin) {
-        fileProperties()
+//        fileProperties()
         modules(
             module {
+                single { mongo.mongoApplication.database }
                 single { mongo.mongoApplication }
                 single { UserBookRepository(get()) }
             },
@@ -72,14 +68,14 @@ fun Application.base() = with(this) {
     }
 }
 
-suspend inline fun <T> ApplicationCall.handleRequest(function: (request: ApplicationRequest) -> RestResponse<T>) {
+suspend inline fun <T> ApplicationCall.handleRequest(function: (request: ApplicationRequest) -> RestResponse<*>) {
     respond(function(this.request))
 }
 
-suspend inline fun PipelineContext<Unit, ApplicationCall>.handleRequest(function: (request: ApplicationRequest) -> BaseResponse) {
+suspend inline fun PipelineContext<Unit, ApplicationCall>.handleRequest(function: (request: ApplicationRequest) -> RestResponse<*>) {
     this.call.respond(function(this.call.request))
 }
 
-suspend inline fun PipelineContext<Unit, ApplicationCall>.handleRequest(  function:  suspend (request: ApplicationRequest) -> BaseResponse) {
+suspend inline fun PipelineContext<Unit, ApplicationCall>.handleRequest(function: suspend (request: ApplicationRequest) -> RestResponse<*>) {
     this.call.respond(function(this.call.request))
 }
