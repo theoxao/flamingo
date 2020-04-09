@@ -1,8 +1,5 @@
 package com.theoxao.views
 
-import com.theoxao.documents.UserBook
-import org.apache.commons.beanutils.BeanUtils
-
 /**
  * Created by theo on 2018/11/14
  */

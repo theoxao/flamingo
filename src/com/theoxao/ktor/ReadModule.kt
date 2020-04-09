@@ -1,6 +1,6 @@
 package com.theoxao.ktor
 
-import com.theoxao.handleRequest
+import com.theoxao.com.theoxao.handleRequest
 import com.theoxao.service.read.BookService
 import com.theoxao.service.read.ExcerptService
 import com.theoxao.service.read.ReadService

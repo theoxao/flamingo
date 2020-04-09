@@ -1,6 +1,6 @@
 package com.theoxao.service.read
 
-import common.web.RestResponse
+import com.theoxao.common.web.RestResponse
 import io.ktor.request.ApplicationRequest
 
 /**

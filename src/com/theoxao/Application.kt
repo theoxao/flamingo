@@ -1,4 +1,4 @@
-package com.theoxao
+package com.theoxao.com.theoxao
 
 import com.theoxao.config.Mongo
 import com.theoxao.repository.UserBookRepository

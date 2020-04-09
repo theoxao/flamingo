@@ -1,4 +1,4 @@
-package common.web
+package com.theoxao.common.web
 
 import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.Serializable

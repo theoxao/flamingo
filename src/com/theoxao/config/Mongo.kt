@@ -1,7 +1,6 @@
 package com.theoxao.config
 
 import io.ktor.application.Application
-import io.ktor.application.ApplicationCallPipeline
 import io.ktor.application.ApplicationFeature
 import io.ktor.util.AttributeKey
 import io.ktor.util.KtorExperimentalAPI

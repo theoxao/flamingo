@@ -1,11 +1,10 @@
 package com.theoxao.service.read
 
 import com.theoxao.common.web.BaseView
-import com.theoxao.documents.UserBook
 import com.theoxao.repository.UserBookRepository
 import com.theoxao.request.UserBookRequest
 import com.theoxao.views.UserBookView
-import common.web.RestResponse
+import com.theoxao.common.web.RestResponse
 import io.ktor.request.ApplicationRequest
 
 /**
@@ -17,7 +16,9 @@ class ReadService(private val userBookRepository: UserBookRepository) {
     suspend fun getUserBook(request: ApplicationRequest): RestResponse {
         val id = request.call.parameters["id"]!!
         val book = userBookRepository.getUserBookById(id)
-        return book?.let { RestResponse(UserBookView.fromEntity(it)) }?:RestResponse(BaseView("a"))
+        return book?.let { RestResponse(UserBookView.fromEntity(it)) }?: RestResponse(
+            BaseView("a")
+        )
     }
 
     suspend fun addBook(request:UserBookRequest): RestResponse {
