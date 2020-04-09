@@ -8,5 +8,5 @@ import io.ktor.request.ApplicationRequest
  * @date 19-11-1
  */
 class ShelfService(ph: String) {
-    fun list(request: ApplicationRequest): RestResponse<*> = TODO()
+    fun list(request: ApplicationRequest): RestResponse = TODO()
 }

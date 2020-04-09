@@ -5,22 +5,26 @@ import com.theoxao.repository.UserBookRepository
 import com.theoxao.service.AuthService
 import com.theoxao.service.OCRService
 import com.theoxao.service.read.*
-import common.web.RestResponse
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
+import io.ktor.features.DoubleReceive
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.request.ApplicationRequest
+import io.ktor.request.receiveOrNull
 import io.ktor.response.respond
 import io.ktor.serialization.json
 import io.ktor.util.KtorExperimentalAPI
 import io.ktor.util.pipeline.PipelineContext
 import org.koin.dsl.module
 import org.koin.ktor.ext.Koin
+import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
+import kotlin.reflect.KFunction
+import kotlin.reflect.jvm.jvmErasure
 
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -46,6 +50,8 @@ fun Application.base() = with(this) {
         json()
     }
 
+    install(DoubleReceive)
+
     install(Koin) {
 //        fileProperties()
         modules(
@@ -68,14 +74,38 @@ fun Application.base() = with(this) {
     }
 }
 
-suspend inline fun <T> ApplicationCall.handleRequest(function: (request: ApplicationRequest) -> RestResponse<*>) {
-    respond(function(this.request))
+suspend fun PipelineContext<Unit, ApplicationCall>.handleRequest(function: KFunction<Any>) {
+    if (function.isSuspend) {
+        val args = arrayListOf(*function.map(this.call.request).toTypedArray())
+        val result = suspendCoroutineUninterceptedOrReturn<Any> {
+            args.add(it)
+            function.call(*args.toTypedArray())
+        }
+        this.call.respond(result)
+    } else {
+        val args = function.map(this.call.request).toTypedArray()
+        val result = function.call(*args)
+        this.call.respond(result)
+    }
 }
 
-suspend inline fun PipelineContext<Unit, ApplicationCall>.handleRequest(function: (request: ApplicationRequest) -> RestResponse<*>) {
-    this.call.respond(function(this.call.request))
-}
-
-suspend inline fun PipelineContext<Unit, ApplicationCall>.handleRequest(function: suspend (request: ApplicationRequest) -> RestResponse<*>) {
-    this.call.respond(function(this.call.request))
+suspend fun <T : Any> KFunction<T>.map(request: ApplicationRequest): List<Any> {
+    return this.parameters.map { param ->
+        val clazz = param.type.jvmErasure.java
+        when (clazz.name) {
+            "io.ktor.request.ApplicationRequest" -> request
+            "io.ktor.response.ApplicationResponse" -> request.call.response
+            else -> {
+                request.call.receiveOrNull(param.type) ?: clazz.newInstance().apply {
+                    clazz.declaredFields.forEach {
+                        it.isAccessible = true
+                        val value = request.queryParameters[it.name]
+                        if (value != null) {
+                            it.set(this, value)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

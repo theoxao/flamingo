@@ -5,6 +5,8 @@ import com.theoxao.common.web.BaseView
 import com.theoxao.documents.UserBook
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 
 /**
  * Created by theo on 2018/12/3
@@ -39,7 +41,7 @@ data class UserBookView (
      */
     var createAt: Long?,
     var updateAt: Long?
-): BaseView() {
+) {
     companion object {
         fun fromEntity(entity: UserBook) = UserBookView(
             id = entity._id.toHexString(),

@@ -7,5 +7,4 @@ import kotlinx.serialization.Serializable
  * @date 20-4-1
  */
 @Serializable
-open class BaseView {
-}
+data class BaseView (val name:String)

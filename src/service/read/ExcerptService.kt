@@ -8,11 +8,11 @@ import io.ktor.request.ApplicationRequest
  * @date 19-11-1
  */
 class ExcerptService(ph: Any) {
-    fun selectByPage(request: ApplicationRequest): RestResponse<*> = TODO()
-    fun findById(request: ApplicationRequest): RestResponse<*> = TODO()
-    fun add(request: ApplicationRequest): RestResponse<*> = TODO()
-    fun edit(request: ApplicationRequest): RestResponse<*> = TODO()
-    fun getEdit(request: ApplicationRequest): RestResponse<*> = TODO()
-    fun remove(request: ApplicationRequest): RestResponse<*> = TODO()
+    fun selectByPage(request: ApplicationRequest): RestResponse = TODO()
+    fun findById(request: ApplicationRequest): RestResponse = TODO()
+    fun add(request: ApplicationRequest): RestResponse = TODO()
+    fun edit(request: ApplicationRequest): RestResponse = TODO()
+    fun getEdit(request: ApplicationRequest): RestResponse = TODO()
+    fun remove(request: ApplicationRequest): RestResponse = TODO()
 
 }

@@ -1,8 +1,8 @@
 buildscript {
     repositories {
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
-//        mavenCentral()
-//        jcenter()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -25,13 +25,13 @@ sourceSets {
 }
 
 repositories {
-    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
     mavenLocal()
     mavenCentral()
     jcenter()
     maven { url 'https://kotlin.bintray.com/ktor' }
-    maven {url 'https://kotlin.bintray.com/kotlin-dev'}
-    maven {url 'https://kotlin.bintray.com/kotlin-eap'}
+    maven { url 'https://kotlin.bintray.com/kotlin-dev' }
+    maven { url 'https://kotlin.bintray.com/kotlin-eap' }
 }
 
 dependencies {
@@ -39,7 +39,7 @@ dependencies {
     compile "io.ktor:ktor-server-netty:$ktor_version"
     compile "ch.qos.logback:logback-classic:$logback_version"
     compile "io.ktor:ktor-server-core:$ktor_version"
-    compile  "io.ktor:ktor-serialization:$ktor_version"
+    compile "io.ktor:ktor-serialization:$ktor_version"
     compile 'com.aliyun.openservices:aliyun-openservices:OTS-2.0.4'
     compile 'org.koin:koin-ktor:2.1.1'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
@@ -50,7 +50,4 @@ dependencies {
     compile "org.litote.kmongo:kmongo-coroutine:$kmongo_version"
     compile group: 'redis.clients', name: 'jedis', version: '3.2.0'
     compile "org.koin:koin-core-ext:2.1.1"
-//    compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0"
 }
-
-
