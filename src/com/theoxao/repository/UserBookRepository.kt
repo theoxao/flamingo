@@ -17,4 +17,8 @@ class UserBookRepository(mongoApplication: MongoApplication) : BaseRepository<Us
         return getCollection<UserBook>().findOne(UserBook::_id eq ObjectId(id))
     }
 
+    suspend fun save(userBook: UserBook) {
+        getCollection<UserBook>().save(userBook)
+    }
+
 }

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RestResponse(
-    var status: Int = 500,
+    var status: Int = 200,
     var error: String? = null,
     @ContextualSerialization var data: Any? = null
 ) {

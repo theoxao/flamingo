@@ -14,4 +14,5 @@ abstract class BaseRepository<T>(val mongoApplication: MongoApplication) {
     inline fun <reified T : Any> getCollection(): CoroutineCollection<T> {
         return this.mongoApplication.database.getCollection(collection)
     }
+
 }
