@@ -84,7 +84,7 @@ fun Application.read() = with(this) {
                 handleRequest(readService::readStat)
             }
             post("/read_operate") {
-                handleRequest(readService::readOperation)
+                handleRequest(readService::finishRead)
             }
         }
 

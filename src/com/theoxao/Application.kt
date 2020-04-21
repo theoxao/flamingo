@@ -16,12 +16,15 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.request.ApplicationRequest
 import io.ktor.request.receiveOrNull
+import io.ktor.response.ApplicationResponse
 import io.ktor.response.respond
 import io.ktor.serialization.json
 import io.ktor.util.KtorExperimentalAPI
 import io.ktor.util.pipeline.PipelineContext
 import org.koin.dsl.module
 import org.koin.ktor.ext.Koin
+import java.math.BigDecimal
+import java.math.BigInteger
 import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
 import kotlin.reflect.KFunction
 import kotlin.reflect.jvm.jvmErasure
@@ -89,23 +92,29 @@ suspend fun PipelineContext<Unit, ApplicationCall>.handleRequest(function: KFunc
     }
 }
 
-suspend fun <T : Any> KFunction<T>.map(request: ApplicationRequest): List<Any> {
+suspend fun <T : Any> KFunction<T>.map(request: ApplicationRequest): List<Any?> {
     return this.parameters.map { param ->
-        val clazz = param.type.jvmErasure.java
-        when (clazz.name) {
-            "io.ktor.request.ApplicationRequest" -> request
-            "io.ktor.response.ApplicationResponse" -> request.call.response
-            else -> {
-                request.call.receiveOrNull(param.type) ?: clazz.newInstance().apply {
-                    clazz.declaredFields.forEach {
-                        it.isAccessible = true
-                        val value = request.queryParameters[it.name]
-                        if (value != null) {
-                            it.set(this, value)
-                        }
+        when (val clazz = param.type.jvmErasure.java) {
+            ApplicationRequest::class.java -> request
+            ApplicationResponse::class.java -> request.call.response
+            java.lang.Integer::class.java, java.lang.Float::class.java,
+            java.lang.Double::class.java, java.lang.Long::class.java,
+            java.lang.Boolean::class.java, java.lang.String::class.java,
+            BigDecimal::class.java, BigInteger::class.java,
+            Int::class.java, Float::class.java,
+            Double::class.java, Long::class.java,
+            Boolean::class.java, String::class.java,
+            Char::class.java -> request.call.receiveOrNull(param.type) ?: request.queryParameters[param.name!!]
+            else -> request.call.receiveOrNull(param.type) ?: clazz.newInstance().apply {
+                clazz.declaredFields.forEach {
+                    it.isAccessible = true
+                    val value = request.queryParameters[it.name]
+                    if (value != null) {
+                        it.set(this, value)
                     }
                 }
             }
+
         }
     }
 }
