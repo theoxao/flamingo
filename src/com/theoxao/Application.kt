@@ -23,6 +23,7 @@ import io.ktor.util.KtorExperimentalAPI
 import io.ktor.util.pipeline.PipelineContext
 import org.koin.dsl.module
 import org.koin.ktor.ext.Koin
+import org.koin.ktor.ext.inject
 import java.math.BigDecimal
 import java.math.BigInteger
 import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
@@ -57,18 +58,20 @@ fun Application.base() = with(this) {
 
     install(Koin) {
 //        fileProperties()
+        val readService:ReadService by inject()
         modules(
             module {
                 single { mongo.mongoApplication.database }
                 single { mongo.mongoApplication }
                 single { UserBookRepository(get()) }
             },
+
             module {
                 single { AuthService(get()) }
                 single { OCRService(get()) }
                 single { BookService(get()) }
                 single { ExcerptService(get()) }
-                single { ReadService(get()) }
+                single { readService }
                 single { ShelfService(get()) }
                 single { StatService(get()) }
             }
