@@ -74,17 +74,14 @@ fun Application.read() = with(this) {
             post("/add_book") {
                 handleRequest(readService::addBook)
             }
-            get("/detail") {
-                handleRequest(readService::detail)
-            }
             get("/read_log") {
                 handleRequest(readService::readLog)
             }
             get("/read_stat") {
                 handleRequest(readService::readStat)
             }
-            post("/read_operate") {
-                handleRequest(readService::finishRead)
+            post("/add_read_record") {
+                handleRequest(readService::readLog)
             }
         }
 
@@ -93,6 +90,5 @@ fun Application.read() = with(this) {
                 handleRequest(shelfService::list)
             }
         }
-
     }
 }

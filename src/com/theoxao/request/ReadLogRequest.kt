@@ -7,14 +7,18 @@ import kotlinx.serialization.Serializable
  * @date 20-4-10
  */
 @Serializable
-class FinishReadRequest {
+class ReadLogRequest {
 
     lateinit var userId: String
 
-    lateinit var startAt: String
+     lateinit var refBookId:String
 
-    lateinit var endAt: String
+    var startAt: Long =0
+
+    var endAt: Long = 0
 
     var duration: Long = 0
+
+    var currentPage :Int = 0
 
 }
