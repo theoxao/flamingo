@@ -1,4 +1,4 @@
-package com.theoxao.com.theoxao
+package com.theoxao
 
 import com.theoxao.config.Mongo
 import com.theoxao.repository.UserBookRepository
@@ -30,11 +30,15 @@ import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
 import kotlin.reflect.KFunction
 import kotlin.reflect.jvm.jvmErasure
 
-
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+class Application{
+    companion object{
+        @JvmStatic
+        fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+    }
+}
 
 @KtorExperimentalAPI
-fun Application.base() = with(this) {
+fun Application.main() = with(this) {
     install(CORS) {
         method(HttpMethod.Options)
         method(HttpMethod.Put)
