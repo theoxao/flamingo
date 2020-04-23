@@ -51,27 +51,3 @@ dependencies {
     implementation group: 'redis.clients', name: 'jedis', version: '3.2.0'
     implementation "org.koin:koin-core-ext:2.1.1"
 }
-
-
-jar {
-    manifestContentCharset 'utf-8'
-    metadataCharset 'utf-8'
-    manifest {
-        attributes(
-                "Manifest-Version": "1.0",
-                "Main-Class": "com.theoxao.ApplicationKt"
-        )
-    }
-    print("hello")
-    from{
-        configurations.compile.collect {
-            it.isDirectory()?it:zipTree(it)
-        }
-    }
-}
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
