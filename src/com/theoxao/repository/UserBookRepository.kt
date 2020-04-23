@@ -3,6 +3,8 @@ package com.theoxao.repository
 import com.theoxao.config.MongoApplication
 import com.theoxao.documents.UserBook
 import org.bson.types.ObjectId
+import org.litote.kmongo.coroutine.CoroutineFindPublisher
+import org.litote.kmongo.descending
 import org.litote.kmongo.eq
 
 /**
@@ -13,12 +15,16 @@ class UserBookRepository(mongoApplication: MongoApplication) : BaseRepository<Us
 
     override var collection: String = "user_book"
 
-    suspend fun getUserBookById(id:String): UserBook? {
+    suspend fun getUserBookById(id: String): UserBook? {
         return getCollection<UserBook>().findOne(UserBook::_id eq ObjectId(id))
     }
 
     suspend fun save(userBook: UserBook) {
         getCollection<UserBook>().save(userBook)
+    }
+
+    suspend fun list(userId: String): List<UserBook> {
+        return getCollection<UserBook>().find(UserBook::userId eq userId).sort(descending(UserBook::createAt)).toList()
     }
 
 }

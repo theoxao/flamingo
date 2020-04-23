@@ -2,6 +2,7 @@ package com.theoxao.repository
 
 import com.theoxao.config.MongoApplication
 import com.theoxao.model.ReadLog
+import org.litote.kmongo.descending
 import org.litote.kmongo.eq
 
 /**
