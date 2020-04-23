@@ -30,12 +30,9 @@ import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
 import kotlin.reflect.KFunction
 import kotlin.reflect.jvm.jvmErasure
 
-class Application{
-    companion object{
-        @JvmStatic
-        fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
-    }
-}
+
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+
 
 @KtorExperimentalAPI
 fun Application.main() = with(this) {
@@ -62,7 +59,7 @@ fun Application.main() = with(this) {
 
     install(Koin) {
 //        fileProperties()
-        val readService:ReadService by inject()
+        val readService: ReadService by inject()
         modules(
             module {
                 single { mongo.mongoApplication.database }
